@@ -20,13 +20,15 @@ public class WSRequest<T> extends Request<T> {
     private Map<String, String> mHeaders;
     private Map<String, String> mParams;
     private Priority mPriority;
+    private Object mTag;
+
 
     // </editor-fold>
 
     // <editor-fold desc="CONSTRUCTORS">
 
     @SuppressWarnings("unchecked")
-    protected WSRequest(final Builder builder) {
+    protected WSRequest(final Init<?> builder) {
         super(builder.mMethod, builder.mUrl, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -35,8 +37,10 @@ public class WSRequest<T> extends Request<T> {
             }
         });
 
+        mTag = builder.mTag;
+
         setRetryPolicy(builder.mRetryPolicy);
-        setTag(builder.mTag);
+        setTag(mTag);
         setShouldCache(builder.mShouldCache);
 
         mListener = builder.mListener;
@@ -44,6 +48,14 @@ public class WSRequest<T> extends Request<T> {
         mParams = builder.mParams;
         mPriority = builder.mPriority;
 
+    }
+
+    // </editor-fold>
+
+    // <editor-fold desc="GETTERS">
+
+    public Object getTag() {
+        return mTag;
     }
 
     // </editor-fold>
@@ -79,9 +91,9 @@ public class WSRequest<T> extends Request<T> {
 
     // </editor-fold>
 
-    // <editor-fold desc="BUILDER CLASS">
+    // <editor-fold desc="INIT BUILDER CLASS">
 
-    public static class Builder {
+    public static abstract class Init<Te extends Init<Te>> {
 
         // <editor-fold desc="VARIABLES">
 
@@ -102,8 +114,8 @@ public class WSRequest<T> extends Request<T> {
 
         // <editor-fold desc="CONSTRUCTORS">
 
-        public Builder(int method, String url, String tag) {
-            mMethod = checkMethod(method);
+        public Init(int method, String url, String tag) {
+            mMethod = checkMethodExist(method);
             if (url != null)
                 mUrl = url;
             else
@@ -122,56 +134,58 @@ public class WSRequest<T> extends Request<T> {
 
         // <editor-fold desc="SETTERS">
 
-        public Builder setPriority(Priority priority) {
+        public Te setPriority(Priority priority) {
             mPriority = priority;
-            return this;
+            return self();
         }
 
-        public Builder setParams(Map<String, String> params) {
+        public Te setParams(Map<String, String> params) {
             if (params != null)
                 mParams.putAll(params);
-            return this;
+            return self();
         }
 
-        public Builder addParam(String key, String value) {
+        public Te addParam(String key, String value) {
             mParams.put(key, value);
-            return this;
+            return self();
         }
 
-        public Builder setHeaders(Map<String, String> headers) {
+        public Te setHeaders(Map<String, String> headers) {
             if (headers != null)
                 mHeaders.putAll(headers);
-            return this;
+            return self();
         }
 
-        public Builder addHeader(String key, String value) {
+        public Te addHeader(String key, String value) {
             mHeaders.put(key, value);
-            return this;
+            return self();
         }
 
-        public Builder setTimeout(int timeout) {
+        public Te setTimeout(int timeout) {
             mTimeout = timeout;
-            return this;
+            return self();
         }
 
-        public Builder setNbRetries(int nbRetries) {
+        public Te setNbRetries(int nbRetries) {
             mNbRetries = nbRetries;
-            return this;
+            return self();
         }
 
-        public Builder setShouldCache(boolean shouldCache) {
+        public Te setShouldCache(boolean shouldCache) {
             mShouldCache = shouldCache;
-            return this;
+            return self();
         }
 
-        public Builder setListener(WSResponseListener responseListener) {
+        public Te setListener(WSResponseListener responseListener) {
             mListener = responseListener;
-            return this;
+            return self();
         }
 
         // </editor-fold>
 
         // <editor-fold desc="METHODS">
+
+        protected abstract Te self();
 
         public WSRequest build() {
             mRetryPolicy = new DefaultRetryPolicy(mTimeout, mNbRetries,
@@ -179,25 +193,54 @@ public class WSRequest<T> extends Request<T> {
             return new WSRequest(this);
         }
 
-        public int checkMethod(int method) {
-            switch (method) {
-                case WSMethod.DEPRECATED_GET_OR_POST:
-                case WSMethod.GET:
-                case WSMethod.POST:
-                case WSMethod.PUT:
-                case WSMethod.DELETE:
-                case WSMethod.HEAD:
-                case WSMethod.OPTIONS:
-                case WSMethod.TRACE:
-                case WSMethod.PATCH:
-                    return method;
-                default:
-                    throw new IllegalAccessError("Unknown method type");
-            }
+        // </editor-fold>
+
+    }
+
+    // </editor-fold>
+
+    // <editor-fold desc="BUILDER CLASS">
+
+    public static class Builder extends Init<Builder> {
+
+        // <editor-fold desc="CONSTRUCTORS">
+
+        public Builder(int method, String url, String tag) {
+            super(method, url, tag);
         }
 
         // </editor-fold>
 
+        // <editor-fold desc="METHODS">
+
+        @Override
+        protected Builder self() {
+            return this;
+        }
+
+        // </editor-fold>
+
+    }
+
+    // </editor-fold>
+
+    // <editor-fold desc="METHODS">
+
+    private static int checkMethodExist(int method) {
+        switch (method) {
+            case WSMethod.DEPRECATED_GET_OR_POST:
+            case WSMethod.GET:
+            case WSMethod.POST:
+            case WSMethod.PUT:
+            case WSMethod.DELETE:
+            case WSMethod.HEAD:
+            case WSMethod.OPTIONS:
+            case WSMethod.TRACE:
+            case WSMethod.PATCH:
+                return method;
+            default:
+                throw new IllegalAccessError("Unknown method type");
+        }
     }
 
     // </editor-fold>
