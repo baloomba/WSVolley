@@ -1,5 +1,0 @@
-[submodule "libs/volley"]
-	path = libs/volley
-	url = https://android.googlesource.com/platform/frameworks/volley
-	ignore = dirty
-
