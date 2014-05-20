@@ -1,13 +1,17 @@
 package com.baloomba.wsvolley.widget;
 
 import android.content.Context;
+
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+
 import android.graphics.Bitmap;
+
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.TransitionDrawable;
+
 import android.util.AttributeSet;
 
 import com.baloomba.wsvolley.R;
@@ -321,12 +325,12 @@ public class NetworkImageView extends com.android.volley.toolbox.NetworkImageVie
             updateDrawableAttrs();
         } else
             mDrawable = null;
-        if (mFadeInTime > 0) {
+        if (mFadeInTime > 0 && mDrawable != null) {
             TransitionDrawable td = new TransitionDrawable(new Drawable[]{
                     new ColorDrawable(android.R.color.transparent),
                     mDrawable
             });
-            setImageDrawable(td);
+            super.setImageDrawable(td);
             td.startTransition(mFadeInTime);
         } else
             super.setImageDrawable(mDrawable);
@@ -337,15 +341,14 @@ public class NetworkImageView extends com.android.volley.toolbox.NetworkImageVie
         if (drawable != null) {
             mDrawable = RoundedDrawable.fromDrawable(drawable);
             updateDrawableAttrs();
-        } else {
+        } else
             mDrawable = null;
-        }
-        if (mFadeInTime > 0) {
+        if (mFadeInTime > 0 && mDrawable != null) {
             TransitionDrawable td = new TransitionDrawable(new Drawable[]{
                     new ColorDrawable(android.R.color.transparent),
                     mDrawable
             });
-            setImageDrawable(td);
+            super.setImageDrawable(td);
             td.startTransition(mFadeInTime);
         } else
             super.setImageDrawable(mDrawable);

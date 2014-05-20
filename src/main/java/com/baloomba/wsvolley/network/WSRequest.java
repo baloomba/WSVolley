@@ -16,12 +16,11 @@ public class WSRequest<T> extends Request<T> {
 
     // <editor-fold desc="VARIABLES">
 
-    private WSResponseListener<T> mListener;
-    private Map<String, String> mHeaders;
-    private Map<String, String> mParams;
-    private Priority mPriority;
-    private Object mTag;
-
+    protected WSResponseListener<T> mListener;
+    protected Map<String, String> mHeaders;
+    protected Map<String, String> mParams;
+    protected Priority mPriority;
+    protected Object mTag;
 
     // </editor-fold>
 
@@ -85,8 +84,14 @@ public class WSRequest<T> extends Request<T> {
 
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse networkResponse) {
+        WSManager.getInstance().saveCookies();
         return Response.success((mListener != null ? mListener.parseResponse(networkResponse) :
                 null), HttpHeaderParser.parseCacheHeaders(networkResponse));
+    }
+
+    @Override
+    protected VolleyError parseNetworkError(VolleyError volleyError) {
+        return super.parseNetworkError(volleyError);
     }
 
     // </editor-fold>
