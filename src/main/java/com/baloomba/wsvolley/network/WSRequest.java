@@ -84,7 +84,6 @@ public class WSRequest<T> extends Request<T> {
 
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse networkResponse) {
-        WSManager.getInstance().saveCookies();
         return Response.success((mListener != null ? mListener.parseResponse(networkResponse) :
                 null), HttpHeaderParser.parseCacheHeaders(networkResponse));
     }

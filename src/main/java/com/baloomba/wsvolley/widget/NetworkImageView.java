@@ -23,20 +23,19 @@ public class NetworkImageView extends com.android.volley.toolbox.NetworkImageVie
 
     private static final String TAG = NetworkImageView.class.getSimpleName();
 
+    // KEY
     private static final String NAME_SPACE = "http://schemas.android.com/apk/res-auto";
-
     private static final String RATIO = "ratio";
     private static final String FADE_IN_TIME = "fade_in_time";
     private static final String CORNER_RADIUS = "corner_radius";
     private static final String BORDER_WIDTH = "border_width";
 
+    // DEFAULT VALUES
     public static final int DEFAULT_FADE_IN_TIME = 0;
     public static final float DEFAUTL_RATIO = 0F;
     public static final int DEFAULT_RADIUS = 0;
     public static final int DEFAULT_BORDER_WIDTH = 0;
 
-    private int mFadeInTime = DEFAULT_FADE_IN_TIME;
-    private Float mRatio = DEFAUTL_RATIO;
     private static final ScaleType[] sScaleTypeArray = {
             ScaleType.MATRIX,
             ScaleType.FIT_XY,
@@ -47,14 +46,18 @@ public class NetworkImageView extends com.android.volley.toolbox.NetworkImageVie
             ScaleType.CENTER_CROP,
             ScaleType.CENTER_INSIDE
     };
-    private int mCornerRadius = DEFAULT_RADIUS;
-    private int mBorderWidth = DEFAULT_BORDER_WIDTH;
-    private ColorStateList mBorderColor = ColorStateList.valueOf(RoundedDrawable.DEFAULT_BORDER_COLOR);
-    private boolean mRoundBackground = false;
-    private boolean mOval = false;
-    private Drawable mDrawable;
-    private Drawable mBackgroundDrawable;
-    private ScaleType mScaleType;
+
+    // PROPERTIES
+    protected int mFadeInTime = DEFAULT_FADE_IN_TIME;
+    protected Float mRatio = DEFAUTL_RATIO;
+    protected int mCornerRadius = DEFAULT_RADIUS;
+    protected int mBorderWidth = DEFAULT_BORDER_WIDTH;
+    protected ColorStateList mBorderColor = ColorStateList.valueOf(RoundedDrawable.DEFAULT_BORDER_COLOR);
+    protected boolean mRoundBackground = false;
+    protected boolean mOval = false;
+    protected Drawable mDrawable;
+    protected Drawable mBackgroundDrawable;
+    protected ScaleType mScaleType;
 
     // </editor-fold>
 
