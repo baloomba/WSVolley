@@ -15,7 +15,7 @@ import android.graphics.drawable.TransitionDrawable;
 import android.util.AttributeSet;
 
 import com.baloomba.wsvolley.R;
-import com.baloomba.wsvolley.network.WSManager;
+import com.baloomba.wsvolley.WSManager;
 
 public class NetworkImageView extends com.android.volley.toolbox.NetworkImageView {
 
@@ -32,7 +32,7 @@ public class NetworkImageView extends com.android.volley.toolbox.NetworkImageVie
 
     // DEFAULT VALUES
     public static final int DEFAULT_FADE_IN_TIME = 0;
-    public static final float DEFAUTL_RATIO = 0F;
+    public static final float DEFAULT_RATIO = 0F;
     public static final int DEFAULT_RADIUS = 0;
     public static final int DEFAULT_BORDER_WIDTH = 0;
 
@@ -49,7 +49,7 @@ public class NetworkImageView extends com.android.volley.toolbox.NetworkImageVie
 
     // PROPERTIES
     protected int mFadeInTime = DEFAULT_FADE_IN_TIME;
-    protected Float mRatio = DEFAUTL_RATIO;
+    protected Float mRatio = DEFAULT_RATIO;
     protected int mCornerRadius = DEFAULT_RADIUS;
     protected int mBorderWidth = DEFAULT_BORDER_WIDTH;
     protected ColorStateList mBorderColor = ColorStateList.valueOf(RoundedDrawable.DEFAULT_BORDER_COLOR);
@@ -184,7 +184,7 @@ public class NetworkImageView extends com.android.volley.toolbox.NetworkImageVie
         if (attrs != null) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.NetworkImageView,
                     defStyle, 0);
-            mRatio = attrs.getAttributeFloatValue(NAME_SPACE, RATIO, DEFAUTL_RATIO);
+            mRatio = attrs.getAttributeFloatValue(NAME_SPACE, RATIO, DEFAULT_RATIO);
             mFadeInTime = attrs.getAttributeIntValue(NAME_SPACE, FADE_IN_TIME, DEFAULT_FADE_IN_TIME);
 
             int index = a != null ?
