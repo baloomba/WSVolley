@@ -240,6 +240,7 @@ public class WSRequest<T> extends Request<T> {
             case WSMethod.OPTIONS:
             case WSMethod.TRACE:
             case WSMethod.PATCH:
+            case WSMethod.POST_MULTI_PART:
                 return method;
             default:
                 throw new IllegalAccessError("Unknown method type");
