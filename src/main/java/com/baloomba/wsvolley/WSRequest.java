@@ -191,9 +191,13 @@ public class WSRequest<T> extends Request<T> {
         protected abstract Te self();
 
         public WSRequest build() {
+            setRetryPolicy();
+            return new WSRequest(this);
+        }
+
+        protected void setRetryPolicy() {
             mRetryPolicy = new DefaultRetryPolicy(mTimeout, mNbRetries,
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-            return new WSRequest(this);
         }
 
         // </editor-fold>
