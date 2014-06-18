@@ -90,6 +90,7 @@ public class WSMultipartRequest extends WSRequest<String> {
 
         public WSMultipartRequest build() {
             setRetryPolicy();
+            mEntity = mMultipartEntityBuilder.build();
             return new WSMultipartRequest(this);
         }
 
