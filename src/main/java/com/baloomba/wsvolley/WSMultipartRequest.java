@@ -6,6 +6,7 @@ import com.android.volley.AuthFailureError;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MIME;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.entity.mime.content.StringBody;
@@ -74,7 +75,7 @@ public class WSMultipartRequest extends WSRequest<String> {
         // <editor-fold desc="SETTERS">
 
         public Te addParam(String key, String value) {
-            mMultipartEntityBuilder.addPart(key, new StringBody(value, ContentType.TEXT_PLAIN));
+            mMultipartEntityBuilder.addPart(key, new StringBody(value, ContentType.create("text/plain", MIME.UTF8_CHARSET)));
             return self();
         }
 
