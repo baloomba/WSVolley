@@ -3,6 +3,7 @@ package com.baloomba.wsvolley;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.toolbox.OutputStreamProgress;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
@@ -41,13 +42,15 @@ public class WSMultipartRequest extends WSRequest<String> {
 
     @Override
     public byte[] getBody() throws AuthFailureError {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        OutputStreamProgress outputStreamProgress =
+                new OutputStreamProgress(new ByteArrayOutputStream(), this,
+                        mEntity.getContentLength());
         try {
-            mEntity.writeTo(bos);
+            mEntity.writeTo(outputStreamProgress);
         } catch (IOException e) {
             Log.e(TAG, "IOException writing to ByteArrayOutputStream");
         }
-        return bos.toByteArray();
+        return ((ByteArrayOutputStream)outputStreamProgress.getOutputStream()).toByteArray();
     }
 
     // </editor-fold>

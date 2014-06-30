@@ -98,9 +98,16 @@ public class WSRequest<T> extends Request<T> implements ProgressListener {
     // <editor-fold desc="PROGRESS LISTENER IMPLEMENTATION METHODS">
 
     @Override
-    public void onProgress(long current, long total) {
+    public void onDownloadProgress(long current, long total) {
         if (mListener != null) {
-            mListener.onProgress(current, total);
+            mListener.onDownloadProgress(current, total);
+        }
+    }
+
+    @Override
+    public void onUploadProgress(long current, long total) {
+        if (mListener != null) {
+            mListener.onUploadProgress(current, total);
         }
     }
 
