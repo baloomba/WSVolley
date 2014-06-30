@@ -75,7 +75,8 @@ public class WSMultipartRequest extends WSRequest<String> {
         // <editor-fold desc="SETTERS">
 
         public Te addParam(String key, String value) {
-            mMultipartEntityBuilder.addPart(key, new StringBody(value, ContentType.create("text/plain", MIME.UTF8_CHARSET)));
+            mMultipartEntityBuilder.addPart(key, new StringBody(value,
+                    ContentType.create("text/plain", MIME.UTF8_CHARSET)));
             return self();
         }
 

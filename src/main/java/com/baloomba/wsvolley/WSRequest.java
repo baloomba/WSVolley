@@ -5,6 +5,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.Response.ProgressListener;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
@@ -12,7 +13,7 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WSRequest<T> extends Request<T> {
+public class WSRequest<T> extends Request<T> implements ProgressListener {
 
     // <editor-fold desc="VARIABLES">
 
@@ -90,6 +91,17 @@ public class WSRequest<T> extends Request<T> {
     @Override
     protected VolleyError parseNetworkError(VolleyError volleyError) {
         return super.parseNetworkError(volleyError);
+    }
+
+    // </editor-fold>
+
+    // <editor-fold desc="PROGRESS LISTENER IMPLEMENTATION METHODS">
+
+    @Override
+    public void onProgress(long current, long total) {
+        if (mListener != null) {
+            mListener.onProgress(current, total);
+        }
     }
 
     // </editor-fold>
