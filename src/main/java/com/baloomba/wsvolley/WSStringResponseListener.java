@@ -17,4 +17,8 @@ public abstract class WSStringResponseListener implements WSResponseListener<Str
         }
         return response;
     }
+
+    @Override
+    public void onProgress(long current, long total) {}
+
 }
