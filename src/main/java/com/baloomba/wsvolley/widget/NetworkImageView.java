@@ -256,6 +256,17 @@ public class NetworkImageView extends com.android.volley.toolbox.NetworkImageVie
         super.setImageUrl(url, WSManager.getInstance().getImageLoader());
     }
 
+    public void setImageUrl(String url, int errorImageResId) {
+        setErrorImageResId(errorImageResId);
+        super.setImageUrl(url, WSManager.getInstance().getImageLoader());
+    }
+
+    public void setImageUrl(String url, int defaultImageResId, int errorImageResId) {
+        setDefaultImageResId(defaultImageResId);
+        setErrorImageResId(errorImageResId);
+        super.setImageUrl(url, WSManager.getInstance().getImageLoader());
+    }
+
     // </editor-fold>
 
     // <editor-fold desc="OVERRIDDEN VOLLEY NETWORK IMAGE VIEW METHODS">
