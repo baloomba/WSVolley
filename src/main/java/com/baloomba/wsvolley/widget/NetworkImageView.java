@@ -256,8 +256,9 @@ public class NetworkImageView extends com.android.volley.toolbox.NetworkImageVie
         super.setImageUrl(url, WSManager.getInstance().getImageLoader());
     }
 
-    public void setImageUrl(String url, int errorImageResId) {
-        setErrorImageResId(errorImageResId);
+    public void setImageUrl(String url, int imageResId) {
+        setDefaultImageResId(imageResId);
+        setErrorImageResId(imageResId);
         super.setImageUrl(url, WSManager.getInstance().getImageLoader());
     }
 
