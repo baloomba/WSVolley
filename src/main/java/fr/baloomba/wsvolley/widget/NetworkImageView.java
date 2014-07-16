@@ -1,4 +1,4 @@
-package com.baloomba.wsvolley.widget;
+package fr.baloomba.wsvolley.widget;
 
 import android.content.Context;
 
@@ -15,7 +15,7 @@ import android.graphics.drawable.TransitionDrawable;
 import android.util.AttributeSet;
 
 import com.baloomba.wsvolley.R;
-import com.baloomba.wsvolley.WSManager;
+import fr.baloomba.wsvolley.WSManager;
 
 public class NetworkImageView extends com.android.volley.toolbox.NetworkImageView {
 

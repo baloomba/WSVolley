@@ -1,4 +1,4 @@
-package com.baloomba.wsvolley;
+package fr.baloomba.wsvolley;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;

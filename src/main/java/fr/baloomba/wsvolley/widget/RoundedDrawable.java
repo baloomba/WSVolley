@@ -1,4 +1,4 @@
-package com.baloomba.wsvolley.widget;
+package fr.baloomba.wsvolley.widget;
 
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;

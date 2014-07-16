@@ -1,4 +1,4 @@
-package com.baloomba.wsvolley;
+package fr.baloomba.wsvolley;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.VolleyError;
